@@ -10,6 +10,8 @@ html {
 
 body {
     font-family: 'Biryani', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:rgb(94, 94, 94);
+
 }
 
 #content > div{
@@ -33,6 +35,7 @@ body {
     
     position: fixed;
     top:0;
+    z-index:99;
 }
 
 #nav_container.mainNavbar {
@@ -50,6 +53,7 @@ body {
     
     display:flex;
     align-items: center;
+
 }
 
 #navbar li {
@@ -107,17 +111,25 @@ body {
 
 /*header / landing picture*/
 #container #home {
-    background: linear-gradient(rgba(0, 0, 0, 0.856), rgba(0, 0, 0, 0.61)), url("../imgs//background.jpg") ;
-    background-position: center;
+    background:black;
     height:100vh;
-    margin-top: 0;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    position:relative;
+    overflow:hidden;
 }
 
 #home img {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin:auto;
     max-width: 50%;
+}
+
+#home video {
+    min-height: 100%;
+    opacity: 0.5;
 }
 
 #content h1 {
@@ -143,9 +155,9 @@ body {
     text-align: justify;
 }
 
-#delivery .meals {
+.parContainer {
     height:auto;
-    width:70%;
+    width:75%;
     min-width: 300px;
 
     border: 1px solid black;
@@ -158,22 +170,88 @@ body {
     justify-content: space-evenly;
 }
 
-#delivery div .paragraph {
+.paragraph {
     width:20%;
     min-width: 200px;
     text-align: justify;
     margin:5px;
+    /* color:rgb(94, 94, 94); */
     /* border: 1px solid blue; */
 } 
 
-#delivery div .paragraph > h3 {
+.paragraph > h3 {
     text-align: left;
-} 
+    text-transform: uppercase;
+    color:rgb(94, 94, 94);
+}
 
+#delivery .parContainer .paragraph i {
+    display:block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/*showcase*/
 #showcase .pictures {
     border:1px solid black;
-    height: 480px;
+    min-height: 480px;
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    align-content: center;
 }
+
+#showcase .pictures .image {
+    width:25%;
+    min-width:300px;
+    height:230px;
+    /* height:50%; */
+    overflow:hidden;
+
+    /* border:2px solid blue; */
+
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    
+    background:black;
+
+    /* background:rgba(0, 0, 0, 0.658); */
+}
+
+#showcase .pictures .image img {
+    width:150%;
+    opacity:0.7;
+    transition: all 0.2s linear 0s;
+}
+
+/*Adjust first image*/
+#showcase .pictures .image:first-child {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../imgs/showcasePic01.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:150%;
+
+    transition: background-size 1s ease-in-out;
+
+}
+
+#showcase .pictures .image img:hover {
+    transform:scale(0.85);
+    opacity:1;
+}
+
+/*Cities*/
+
+.paragraph i, .paragraph a {
+    color: rgb(0, 131, 175);
+}
+
+.paragraph li {
+    margin-left: -10px;
+}
+
 
 /*media queries for different screen sizes*/
 @media screen and (max-width:1200px) {
@@ -189,6 +267,9 @@ body {
     }
     #home img {
         min-width: 65%;
+    }
+    #home video {
+        height: 100%;
     }
 }
 
@@ -245,6 +326,10 @@ body {
 
     #home img {
         min-width:80%;
+    }
+
+    #home video {
+        height: 100%;
     }
 
 }
