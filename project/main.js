@@ -105,7 +105,7 @@ $(function () {
 var items = [];
 
 function getData() {
-    $.getJSON('http://www.fulek.com/VUA/SUPIT/GetCategoriesAndFoods', function (data) {
+    $.getJSON('https://www.fulek.com/VUA/SUPIT/GetCategoriesAndFoods', function (data) {
         data.forEach(element => {
             addTitle(element.Naziv);
             //array ponude
