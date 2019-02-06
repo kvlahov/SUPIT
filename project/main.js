@@ -1,20 +1,12 @@
 $(function () {
-    // make navbar obey
-    // $('#navbar li a').click(function(){    
-    //     var divId = $(this).attr('href');
-    //     $('html, body').animate({
-    //         scrollTop: $(divId).offset().top - 60
-    //     }, 100);
-    // });
-
     //for smartphones
     // if ($(window).width() <= 768) {
-        $('#navbar li.hamburger').on("click", function () {
-            $("#navbar li a").toggleClass('showNavbar');
-            $('#navbar #homeIcon a').text("Home").css("padding","10px 15px");
-        });
+    $('#navbar li.hamburger').on("click", function () {
+        $("#navbar li a").toggleClass('showNavbar');
+        $('#navbar #homeIcon a').text("Home").css("padding", "10px 15px");
+    });
 
-        $('#navbar li a').on('click', () => $("#navbar li a").toggleClass('showNavbar'));
+    $('#navbar li a').on('click', () => $("#navbar li a").toggleClass('showNavbar'));
     // }
 
     //change navbar based on scroll position
@@ -37,5 +29,135 @@ $(function () {
         }
     })
 
+    //edit fancybox
+    $('[data-fancybox="gallery"]').fancybox({
+        buttons: [
+            "close"
+        ],
+        animationEffect: "fade",
+        helpers: {
+            overlay: {
+                closeClick: false
+            }
+        },
+
+    });
+
+    $('#order').dialog({
+        autoOpen: false,
+        modal: true,
+        show: {
+            effect: "fade",
+            duration: 500
+        },
+        hide: {
+            effect: "fade",
+            duration: 500
+        },
+        width: "80%",
+        height: 520,
+        resizable: false,
+        close: () => $('body').removeClass('stop-scrolling'),
+    });
+
+    $(".ui-dialog-titlebar").hide();
+
+    getData();
+
+    //order button click event
+    $("#orderButton").click(function (e) {
+        e.preventDefault()
+        $('#order').dialog('open');
+        $('#order').addClass('modal');
+        //loading
+
+        $('body').addClass('stop-scrolling')
+    })
+
+    $('#orderPop').dialog({
+        autoOpen: false,
+        resizable: false,
+        draggable: false,
+        width: 250,
+        height: 270,
+        buttons: [
+            {
+                class: "dialogButton",
+                text: "Naruči", 
+                click: function (e) {
+                    const name = $(this).dialog('option', 'title');
+                    const id = items.find(e => e.Naziv === name).JeloId;
+                    const quantity = $('#quantity').val();
+                    const price = items.find(e => e.Naziv === name).Cijena;
+
+                    addToOrderList(id, name, quantity, price)
+                    updateTotal();
+                    addClickEvent();
+                    
+                    $(this).dialog('close');
+                }
+            },
+        ],
+    })
+
 
 })
+var items = [];
+
+function getData() {
+    $.getJSON('http://www.fulek.com/VUA/SUPIT/GetCategoriesAndFoods', function (data) {
+        data.forEach(element => {
+            addTitle(element.Naziv);
+            //array ponude
+            element.Ponuda.forEach(e => {
+                addItem(e.Naziv, e.Opis, e.Cijena);
+                items.push(e);
+            })
+        });
+
+        $('.item').click((e) => {
+            let title = $(event.target).attr('title');
+            $("#orderPop").dialog('option', 'title', title).dialog({ position: { my: "left top", at: "right top", of: $(event.target) } });
+            $('#orderPop').dialog('open');
+        })
+    });
+}
+
+function addTitle(title) {
+    var html = `<div class="title"><h4>${title}</h4></div>`;
+    $('.foodList').append(html);
+}
+
+function addItem(name, description, price) {
+    var item = $('<div></div>')
+        .addClass('item')
+        .attr('title', name);
+    var html = `<div class="meal"><h5>${name}</h5><h6>${description}</h6></div><p class="itemPrice">${price},00kn</p></div>`;
+    item.append(html);
+    $('.foodList').append(item);
+}
+
+function addToOrderList(id, name, quantity, price) {
+    var html = `<tr><td>${id}</td><td>${name}</td><td>${quantity}</td><td>${price},00</td></tr>`;
+    $('#orderItems').append(html)
+}
+
+function updateTotal() {
+    var sum = 0;
+    var quantityList = $('#orderItems tr td:nth-child(3)');
+    var priceList = $('#orderItems tr td:nth-child(4)');
+    for (let i = 0; i < quantityList.length; i++) {
+        var q = parseInt($(quantityList[i]).text());
+        var p = parseInt($(priceList[i]).text());
+        sum += q*p;      
+    }
+    $('.orderList tfoot td:last-child()').text(sum + ",00kn");
+    
+}
+
+function addClickEvent() {
+    $('#orderItems tr').click((e) => {
+        $(e.target).parent().remove()
+        updateTotal();
+    })
+}

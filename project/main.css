@@ -1,4 +1,5 @@
 /*Globals*/
+
 *{
     box-sizing: border-box;
     margin:0;
@@ -8,7 +9,7 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    font-family: 'Biryani', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Biryani', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
     color:rgb(94, 94, 94);
 }
 
@@ -126,7 +127,6 @@ input[type="button"], input[type="submit"] {
 #navbar li.left {
     margin-right:auto;
 }
-
 #navbar li a {
     display:flex;
 
@@ -178,6 +178,144 @@ input[type="button"], input[type="submit"] {
     min-height: 100%;
     opacity: 0.5;
 }
+
+/* Order */
+.modal{
+    padding: 20px 20px !important;
+    background: rgb(224, 224, 224) !important;    
+    width:100% ;
+    height: 100% ;
+    overflow:hidden !important;
+}
+.modal h1 {
+    text-align:center !important;
+    text-transform: uppercase;
+    color: rgb(97, 97, 97);
+    line-height: 1.5em;
+    font-weight: 400;
+}
+.modal h1:after {
+    content: "";
+    display: block;
+    margin: 0 auto 30px;
+    width: 15%;
+    padding-top: 20px;
+
+    border-bottom: 2px solid rgb(0, 131, 175);
+}
+
+#order {
+    font-family: 'Biryani';
+}
+.orderContainer {
+    display:flex;
+    justify-content: space-between;
+}
+.modal .foodList {
+    overflow-y: scroll;
+
+    width:50%;
+    height:calc(70vh - 135px);
+    margin-right:20px;
+}
+.orderList {
+    width:50%;
+    position: sticky;
+    top:50px;
+    right: 5px;
+}
+.modal .title {
+    background:rgb(36, 36, 36);
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    height:2em;
+    padding:7px 0 0; 
+
+    /* border:2px solid white; */
+}
+.modal .item {
+    border: 1px solid rgba(0, 0, 0, 0.671);
+    border-top: none;
+    padding:5px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal .item:hover, #orderItems tr:hover{
+    background:rgb(184, 184, 184);
+    cursor: pointer;
+}
+.modal .meal {
+    display:inline-block;
+}
+.modal .itemPrice {
+    padding:5px;
+    padding-top:10px;
+    background:rgb(255, 198, 92);
+    border-radius: 5px;
+    display:inline-block;
+    font-size: 0.9em;
+}
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+  }
+/* order list table */
+.orderList table {
+    width:100%;
+    padding:10px;
+    border-collapse: collapse;
+}
+.orderList th {
+    text-align: left;
+    text-transform: uppercase;
+    border-bottom:2px solid black;
+
+}
+.orderList th, td {
+    padding:5px 15px 5px 5px ;
+    font-size: 0.85em;
+}
+.orderList th:nth-child(2) {
+    width:60%;
+}
+.orderList td:nth-child(3) {
+    text-align: center;
+}
+.orderList tr:nth-child(even) {
+    background: rgb(209, 209, 209);
+    border-top: 2px solid rgb(189, 189, 189);
+    border-bottom: 2px solid rgb(189, 189, 189);
+
+}
+.orderList tfoot td {
+    border-top: 2px solid black;
+    padding-right:0;
+}
+.orderList tfoot td:last-child {
+    color: red;
+}
+.dialogButton {
+    width:200px !important;
+    background: rgb(255, 188, 64) !important;
+    color:rgb(0, 0, 0) !important;
+}
+#orderPop {
+    overflow:hidden;
+}
+#orderPop p {
+    font-weight: 700;
+}
+#orderPop input[type="number"]{
+    width:40px;
+    margin-bottom:5px;
+}
+
+/*Delivery*/
 #delivery > p {
     width:40%;
     min-width: 300px;
@@ -211,12 +349,18 @@ input[type="button"], input[type="submit"] {
     
     background:black;
 }
-#showcase .pictures .image img {
+
+.image a {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+#showcase .pictures .image a img {
     width:150%;
     opacity:0.7;
     transition: all 0.2s linear 0s;
 }
-#showcase .pictures .image img:hover {
+#showcase .pictures .image a img:hover {
     transform:scale(0.85);
     opacity:1;
 }
@@ -228,6 +372,7 @@ input[type="button"], input[type="submit"] {
 #mobileApp .phoneImage {
     width:200px;
     margin-right:80px;
+    margin-bottom:20px;
 }
 #mobileApp img {
     display: block;
@@ -309,6 +454,7 @@ input[type="button"], input[type="submit"] {
 #subscriptions .paragraph {
     background:rgb(224, 224, 224);
     margin-right:25px;
+    margin-bottom: 25px;
 }
 #subscriptions .paragraph hr {
     margin:5px 0 20px;
@@ -382,7 +528,12 @@ input[type="button"], input[type="submit"] {
     }
 
     #mobileApp .phoneImage {
-        margin-right:0;
+        margin-right:25px;
+    }
+
+    #cities .paragraph {
+        margin-right:20px;
+        
     }
     
     #contact table {
@@ -442,7 +593,7 @@ input[type="button"], input[type="submit"] {
     }
 
     #mobileApp .phoneImage {
-        margin-right:0;
+        margin-right:25px;
     }
 
     #contact tr {
