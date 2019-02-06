@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- jquery ui -->
     <link rel="stylesheet" href="./lib/jquery-ui-1.12.1.custom/jquery-ui.min.css">
@@ -98,13 +99,14 @@
                 <p>Napomena:</p>
                 <textarea name="Napomena" id="" cols="20" rows="4" maxlength="100" style="resize:none"></textarea>
             </div>
+
             <div id="delivery">
                 <h1>Daily offer top 4 meals - delivery</h1>
                 <p>The key to our success is simple: providing quallity consistent food that tastes great every single
                     time.
                     We pride ourselves on serving our customers delicious genuine dishes from the Chinese culture.
                 </p>
-                <div class="parContainer">
+                <div class="parContainer"data-aos="fade-up" data-aos-anchor-placement="top-center">
                     <div class="paragraph">
                         <i class="fa fa-cutlery fa-2x"></i>
                         <h3>Ma Po Tofu</h3>
@@ -155,9 +157,9 @@
 
                 </div>
             </div>
-            <div id="showcase">
+            <div id="showcase" >
                 <h1>Showcase of our favorite meals</h1>
-                <div class="pictures">
+                <div class="pictures" data-aos="fade-up" data-aos-anchor-placement="top-center">
                     <div class="image">
                         <a href="./imgs/showcasePic01.jpg" data-fancybox="gallery"><img src="./imgs/showcasePic01.jpg"
                                 alt=""></a>
@@ -194,7 +196,7 @@
             </div>
             <div id="mobileApp" class="diffBackground">
                 <h1>Mobile app - carry your food in your pocket</h1>
-                <div class="parContainer">
+                <div class="parContainer" data-aos="fade-up" data-aos-anchor-placement="top-center">
                     <div class="phoneImage">
                         <img src="./imgs/mobileApp.png" alt="">
                     </div>
@@ -215,7 +217,7 @@
             <div id="cities">
                 <h1>You can find us in all parts of the world. <br>These are some of the places where you can find us</h1>
                 <p></p>
-                <div class="parContainer">
+                <div class="parContainer" data-aos="fade-up" data-aos-anchor-placement="top-center">
                     <div class="paragraph">
                         <div class="image">
                             <img src="./imgs/citiesNewYork.jpg" alt="">
@@ -258,7 +260,7 @@
             </div>
             <div id="comments">
                 <h1>Read the experiences of our customers</h1>
-                <div class="parContainer">
+                <div class="parContainer" data-aos="fade-up" data-aos-anchor-placement="top-center">
                     <div class="paragraph">
                         <i class="fa fa-quote-left fa-2x"></i>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus enim eligendi repellat,
@@ -295,7 +297,7 @@
             </div>
             <div id="subscriptions" class="diffBackground">
                 <h1>Subscribe to save money</h1>
-                <div class="parContainer">
+                <div class="parContainer" data-aos="fade-up" data-aos-anchor-placement="top-center">
                     <div class="paragraph">
                         <h3>Terminator</h3>
                         <p><span class="price">$219</span>/month</p>
@@ -340,7 +342,7 @@
             </div>
             <div id="contact">
                 <h1>Contact us</h1>
-                <form action="http://www.fulek.com/VUA/SUPIT/ContactUs" method="POST" autocomplete="off" class="parContainer">
+                <form action="http://www.fulek.com/VUA/SUPIT/ContactUs" method="POST" autocomplete="off" class="parContainer" >
                     <table>
                         <tr>
                             <td><label for="name">Name:</label></td>
@@ -382,6 +384,10 @@
         <div id="footer"></div>
     </div>
 
+    <script>
+        AOS.init();
+        window.addEventListener('load', AOS.refresh);
+      </script>
 </body>
 
 </html>
