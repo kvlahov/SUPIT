@@ -43,6 +43,7 @@ $(function () {
 
     });
 
+    //modal dialog config
     $('#order').dialog({
         autoOpen: false,
         modal: true,
@@ -55,35 +56,58 @@ $(function () {
             duration: 500
         },
         width: "80%",
-        height: 520,
+        height: 520,    //positioning doesnt work without this
         resizable: false,
         close: () => $('body').removeClass('stop-scrolling'),
     });
 
+    //hide title of modal
     $(".ui-dialog-titlebar").hide();
 
-    getData();
+    // getData('http://www.fulek.com/VUA/SUPIT/GetCategoriesAndFoods');
+    getData('./project/meni.txt');
 
     //order button click event
     $("#orderButton").click(function (e) {
+        var duration = 500;
         e.preventDefault()
+
         $('#order').dialog('open');
         $('#order').addClass('modal');
+
         //loading
+        loadingAnimation(duration);
 
         $('body').addClass('stop-scrolling')
     })
 
+    //order click event, close order popup
+    $('#order').click((e) => {
+        if ($('#orderPop').dialog('isOpen')) {
+            // $('#orderPop').dialog('close');
+        }
+
+    })
+    //order pop up dialog config
     $('#orderPop').dialog({
         autoOpen: false,
         resizable: false,
         draggable: false,
         width: 250,
         height: 270,
+        modal: true,
+        show: {
+            effect: "fade",
+            duration: 150
+        },
+        hide: {
+            effect: "fade",
+            duration: 150
+        },
         buttons: [
             {
                 class: "dialogButton",
-                text: "Naruči", 
+                text: "Naruči",
                 click: function (e) {
                     const name = $(this).dialog('option', 'title');
                     const id = items.find(e => e.Naziv === name).JeloId;
@@ -93,19 +117,36 @@ $(function () {
                     addToOrderList(id, name, quantity, price)
                     updateTotal();
                     addClickEvent();
-                    
+
                     $(this).dialog('close');
                 }
             },
         ],
+        open: () => {
+            $('.ui-widget-overlay:last-child()').css('opacity', '0');
+            $('.ui-widget-overlay').bind('click', function () {
+                $('#orderPop').dialog('close');
+            })
+        },
+        close: () => {
+            $('.overlayRight, .overlayTop').remove();
+            $('#quantity').val(1);
+            $('#orderPop textarea').val('');
+        },
+
+    })
+
+
+    $('#closeModal').click((e) => {
+        $('#order').dialog('close');
     })
 
 
 })
 var items = [];
 
-function getData() {
-    $.getJSON('https://www.fulek.com/VUA/SUPIT/GetCategoriesAndFoods', function (data) {
+function getData(src) {
+    $.getJSON(src, function (data) {
         data.forEach(element => {
             addTitle(element.Naziv);
             //array ponude
@@ -115,6 +156,7 @@ function getData() {
             })
         });
 
+        //item click event
         $('.item').click((e) => {
             let title = $(event.target).attr('title');
             $("#orderPop").dialog('option', 'title', title).dialog({ position: { my: "left top", at: "right top", of: $(event.target) } });
@@ -149,10 +191,10 @@ function updateTotal() {
     for (let i = 0; i < quantityList.length; i++) {
         var q = parseInt($(quantityList[i]).text());
         var p = parseInt($(priceList[i]).text());
-        sum += q*p;      
+        sum += q * p;
     }
     $('.orderList tfoot td:last-child()').text(sum + ",00kn");
-    
+
 }
 
 function addClickEvent() {
@@ -160,4 +202,37 @@ function addClickEvent() {
         $(e.target).parent().remove()
         updateTotal();
     })
+}
+
+var animationTimes = 0;
+function loadingAnimation(duration) {
+    //animate once
+    $('#loading h2').fadeToggle(duration, () => {
+        $('#loading h2').fadeToggle(duration);
+    })
+    animationTimes++;
+
+    //then every duration*2 ms
+    var loadId = setInterval(() => loading(duration, loadId), duration * 2);
+
+    
+
+}
+
+function loading(duration, loadId) {
+    $('#loading h2').fadeToggle(duration, () => {
+        $('#loading h2').fadeToggle(duration);
+    })
+    animationTimes++;
+
+    if (animationTimes >= 5) {
+        console.log("entered if");
+        clearInterval(loadId);
+        animationTimes = 0;
+
+        //set timeout because animation will execute one more time
+        setTimeout(() => {
+            $('#loading').fadeToggle(duration);
+        }, duration * 2);
+    }
 }

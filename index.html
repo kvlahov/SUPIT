@@ -53,6 +53,7 @@
 
         <div id="content">
             <div id="order" title="Order dialog">
+                <i class="fa fa-window-close fa-2x" id="closeModal" aria-hidden="true"></i>
                 <h1>Order</h1>
                 <div class="orderContainer">
                     <div class="foodList">
@@ -87,14 +88,25 @@
                         </table>
                     </div>
                 </div>
+                <div id="orderPop" title="Order">
+                    <p>Količina</p>
+                    <input type="number" id ="quantity" min = "1" max ="20" maxlength="2" value="1" onkeydown="return false">
+                    <p>Napomena:</p>
+                    <textarea name="Napomena" id="" cols="20" rows="4" maxlength="100" style="resize:none"></textarea>
+                </div>
+                <div id="loading" class="modal" style="position:absolute; top:0; left:0;">
+                    <h2>Loading...</h2>
+                </div>
             </div>
 
-            <div id="orderPop" title="Order">
+            <!-- <div id="orderPop" title="Order">
                 <p>Količina</p>
                 <input type="number" id ="quantity" min = "1" max ="20" maxlength="2" value="1" onkeydown="return false">
                 <p>Napomena:</p>
                 <textarea name="Napomena" id="" cols="20" rows="4" maxlength="100" style="resize:none"></textarea>
-            </div>
+            </div> -->
+
+
 
             <div id="delivery">
                 <h1>Daily offer top 4 meals - delivery</h1>

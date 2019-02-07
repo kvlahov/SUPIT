@@ -203,6 +203,27 @@ input[type="button"], input[type="submit"] {
 
     border-bottom: 2px solid rgb(0, 131, 175);
 }
+/* for loading screen */
+#loading.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#loading.modal h2 {
+    font-size: 3em;
+    color: rgb(97, 97, 97);
+    font-weight: 400;  
+}
+
+.modal #closeModal {
+    position: absolute;
+    top:5px;
+    right:10px;
+    color: rgb(85, 85, 85);
+}
+.modal #closeModal:hover {
+    color: rgb(44, 44, 44);
+}
 
 #order {
     font-family: 'Biryani';
@@ -215,14 +236,11 @@ input[type="button"], input[type="submit"] {
     overflow-y: scroll;
 
     width:50%;
-    height:calc(70vh - 135px);
+    height:calc(70vh - 17vh);
     margin-right:20px;
 }
 .orderList {
     width:50%;
-    position: sticky;
-    top:50px;
-    right: 5px;
 }
 .modal .title {
     background:rgb(36, 36, 36);
@@ -313,6 +331,26 @@ input[type="button"], input[type="submit"] {
 #orderPop input[type="number"]{
     width:40px;
     margin-bottom:5px;
+}
+.overlayRight {
+    position: fixed;
+    top:0;
+    right:0;
+    width:52%;
+    height:100vh;
+    z-index:101;
+    background:black;
+    opacity:0.3;
+}
+.overlayTop {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height: 30vh;
+    z-index:102;
+    background:red;
+    opacity:0.3;
 }
 
 /*Delivery*/
@@ -527,6 +565,13 @@ input[type="button"], input[type="submit"] {
         height: 100%;
     }
 
+    .modal .foodList {
+        height:calc(70vh - 60px);
+    }
+
+    #delivery .parContainer {
+        justify-content: space-evenly;
+    }
     #mobileApp .phoneImage {
         margin-right:25px;
     }
@@ -593,7 +638,15 @@ input[type="button"], input[type="submit"] {
     }
 
     #mobileApp .phoneImage {
-        margin-right:25px;
+        margin:0 auto 15px;
+    }
+    #mobileApp .instructions {
+        margin-left:10px;
+    }
+
+
+    #subscriptions .paragraph {
+        margin: 0 auto 15px;
     }
 
     #contact tr {
