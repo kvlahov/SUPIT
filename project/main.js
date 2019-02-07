@@ -218,8 +218,6 @@ function loadingAnimation(duration) {
     //then every duration*2 ms
     var loadId = setInterval(() => loading(duration, loadId), duration * 2);
 
-    
-
 }
 
 function loading(duration, loadId) {
@@ -229,7 +227,6 @@ function loading(duration, loadId) {
     animationTimes++;
 
     if (animationTimes >= 5) {
-        console.log("entered if");
         clearInterval(loadId);
 
         //set timeout because animation will execute one more time
