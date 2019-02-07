@@ -206,6 +206,9 @@ function addClickEvent() {
 
 var animationTimes = 0;
 function loadingAnimation(duration) {
+    if(animationTimes >=5) {
+        return;
+    }
     //animate once
     $('#loading h2').fadeToggle(duration, () => {
         $('#loading h2').fadeToggle(duration);
