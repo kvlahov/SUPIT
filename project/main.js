@@ -231,7 +231,6 @@ function loading(duration, loadId) {
     if (animationTimes >= 5) {
         console.log("entered if");
         clearInterval(loadId);
-        animationTimes = 0;
 
         //set timeout because animation will execute one more time
         setTimeout(() => {
