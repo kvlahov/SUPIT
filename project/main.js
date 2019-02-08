@@ -216,13 +216,13 @@ function getData(src) {
 
         //item click event
         $('.item').click((e) => {
-            let title = $(event.target).attr('title');
+            let title = $(event.currentTarget).attr('title');
             $("#orderPop").dialog('option', 'title', title)
             if($(window).width() <= 768) {
-                $('#orderPop').dialog({ position: { my: "left top", at: "left bottom", of: $(event.target) } });
+                $('#orderPop').dialog({ position: { my: "left top", at: "left bottom", of: $(event.currentTarget) } });
             }
             else {
-                $('#orderPop').dialog({ position: { my: "left top", at: "right top", of: $(event.target) } });
+                $('#orderPop').dialog({ position: { my: "left top", at: "right top", of: $(event.currentTarget) } });
             }
             $('#orderPop').dialog('open');
         })
