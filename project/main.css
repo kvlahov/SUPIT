@@ -178,7 +178,7 @@ input[type="button"], input[type="submit"] {
     min-height: 100%;
     opacity: 0.5;
 }
-
+/* ############################################### */
 /* Order */
 .modal{
     padding: 20px 20px !important;
@@ -292,7 +292,6 @@ input[type="button"], input[type="submit"] {
     text-align: left;
     text-transform: uppercase;
     border-bottom:2px solid black;
-
 }
 .orderList th, td {
     padding:5px 15px 5px 5px ;
@@ -308,7 +307,6 @@ input[type="button"], input[type="submit"] {
     background: rgb(209, 209, 209);
     border-top: 2px solid rgb(189, 189, 189);
     border-bottom: 2px solid rgb(189, 189, 189);
-
 }
 .orderList tfoot td {
     border-top: 2px solid black;
@@ -332,26 +330,7 @@ input[type="button"], input[type="submit"] {
     width:40px;
     margin-bottom:5px;
 }
-.overlayRight {
-    position: fixed;
-    top:0;
-    right:0;
-    width:52%;
-    height:100vh;
-    z-index:101;
-    background:black;
-    opacity:0.3;
-}
-.overlayTop {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height: 30vh;
-    z-index:102;
-    background:red;
-    opacity:0.3;
-}
+/* ############################################### */
 
 /*Delivery*/
 #delivery > p {
@@ -644,10 +623,6 @@ input[type="button"], input[type="submit"] {
     }
     #order .foodList, .orderList{
         width: 100%;
-    }
-
-    .foodList .itemContent {
-        height:auto !important;
     }
 
     #mobileApp .phoneImage {
