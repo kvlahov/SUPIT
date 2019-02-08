@@ -637,6 +637,19 @@ input[type="button"], input[type="submit"] {
         height: 100%;
     }
 
+    .orderContainer {
+        flex-direction: column;
+        justify-content: center;
+        align-content: space-between;
+    }
+    #order .foodList, .orderList{
+        width: 100%;
+    }
+
+    .foodList .itemContent {
+        height:auto !important;
+    }
+
     #mobileApp .phoneImage {
         margin:0 auto 15px;
     }

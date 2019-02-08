@@ -1,6 +1,5 @@
 $(function () {
     //for smartphones
-    // if ($(window).width() <= 768) {
     $('#navbar li.hamburger').on("click", function () {
         $("#navbar li a").toggleClass('showNavbar');
         $('#navbar #homeIcon a').text("Home").css("padding", "10px 15px");
@@ -55,11 +54,76 @@ $(function () {
             effect: "fade",
             duration: 500
         },
-        width: "80%",
-        height: 520,    //positioning doesnt work without this
         resizable: false,
         close: () => $('body').removeClass('stop-scrolling'),
     });
+
+    setDialogWH();
+    //resize dialog based on window size
+    $(window).resize(setDialogWH);
+
+
+    function setDialogWH() {
+        var w = $(window).width();
+        var h = $(window).height();
+
+        $('#order').dialog('option', 'width', `${w * 0.8}`);
+        $('#order').dialog('option', 'height', `${h * 0.75}`);
+        $('.orderList').show();
+        
+        $('#back').hide();
+        $('#orderListButton').hide();
+
+        if (w <= 1024) {
+            $('#order').dialog('option', 'width', '100%');
+            if (w <= 768) {
+                $('#order').dialog('option', 'height', `${h}`);
+                // var button = [{
+                //     class: "dialogButton",
+                //     text: "Naruči",
+
+                // }];
+                // $('#order').dialog('option', 'buttons', button);
+
+                $('.orderList').hide();
+                $('#orderListButton')
+                    .css({
+                        'width': '100%',
+                        'padding': '15px',
+                        'margin': '10px auto'
+                    })
+                    .show()
+                    .click((e) => {
+                        $('.foodList').hide();
+
+                        $(e.target).hide();
+                        $('#back')
+                            .css({
+                                'width': '100%',
+                                'padding': '15px',
+                                'margin': '10px auto',
+                                'position': 'absolute',
+                                'bottom' : '20px',
+                                'left': `${w/2 - 20}`
+
+                                
+                            })
+                            .click((e) => {
+                                $('.orderList').hide();
+                                $('.foodList').show('slide', 500);
+
+                                $(e.target).hide();
+                                $('#orderListButton').show('slide', 500)
+
+                            });
+                        
+                        $('#back').show('slide', { direction: 'right' }, 500);
+                        $('.orderList').css('height', `${h - 200}`).show('slide', { direction: 'right' }, 500);
+
+                    })
+            }
+        }
+    }
 
     //hide title of modal
     $(".ui-dialog-titlebar").hide();
@@ -81,13 +145,7 @@ $(function () {
         $('body').addClass('stop-scrolling')
     })
 
-    //order click event, close order popup
-    $('#order').click((e) => {
-        if ($('#orderPop').dialog('isOpen')) {
-            // $('#orderPop').dialog('close');
-        }
 
-    })
     //order pop up dialog config
     $('#orderPop').dialog({
         autoOpen: false,
@@ -159,24 +217,46 @@ function getData(src) {
         //item click event
         $('.item').click((e) => {
             let title = $(event.target).attr('title');
-            $("#orderPop").dialog('option', 'title', title).dialog({ position: { my: "left top", at: "right top", of: $(event.target) } });
+            $("#orderPop").dialog('option', 'title', title)
+            if($(window).width() <= 768) {
+                $('#orderPop').dialog({ position: { my: "left top", at: "left bottom", of: $(event.target) } });
+            }
+            else {
+                $('#orderPop').dialog({ position: { my: "left top", at: "right top", of: $(event.target) } });
+            }
             $('#orderPop').dialog('open');
         })
+
+        //set accordion
+        // $('.items').accordion({
+        //     active:false,
+        //     colapsible: true,
+        // })
     });
 }
 
 function addTitle(title) {
     var html = `<div class="title"><h4>${title}</h4></div>`;
-    $('.foodList').append(html);
+    var div = $('<div></div>').addClass('items');
+    $('.foodList').append(html).append(div);
 }
 
 function addItem(name, description, price) {
-    var item = $('<div></div>')
+    var item = $('<h3></h3>')
         .addClass('item')
         .attr('title', name);
-    var html = `<div class="meal"><h5>${name}</h5><h6>${description}</h6></div><p class="itemPrice">${price},00kn</p></div>`;
+    var html = `<div class="meal"><h5>${name}</h5><h6>${description}</h6></div><p class="itemPrice">${price},00kn</p>`;
     item.append(html);
-    $('.foodList').append(item);
+    // var content = $('<div></div>').addClass('itemContent')
+    //     .append(`<p>Količina</p>
+    //         <input type="number" id ="quantity" min = "1" max ="20" maxlength="2" value="1" onkeydown="return false">
+    //         <p>Napomena:</p>
+    //         <textarea name="Napomena" id="" cols="20" rows="4" maxlength="100" style="resize:none"></textarea>
+    //         <button class = "dialogButton">Dodaj</button>`
+            
+    //         );
+    $('.items:last-child()').append(item)
+    // .append(content);
 }
 
 function addToOrderList(id, name, quantity, price) {
@@ -206,7 +286,7 @@ function addClickEvent() {
 
 var animationTimes = 0;
 function loadingAnimation(duration) {
-    if(animationTimes >=5) {
+    if (animationTimes >= 5) {
         return;
     }
     //animate once

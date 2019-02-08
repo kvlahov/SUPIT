@@ -87,10 +87,12 @@
                             </tfoot>
                         </table>
                     </div>
+                    <button id ="orderListButton" class ="dialogButton">Narudžbe -></button>
+                    <button id="back" class ="dialogButton">Natrag</button>
                 </div>
                 <div id="orderPop" title="Order">
                     <p>Količina</p>
-                    <input type="number" id ="quantity" min = "1" max ="20" maxlength="2" value="1" onkeydown="return false">
+                    <input type="number" id ="quantity" min = "1" max ="20" maxlength="2" value="1" onkeydown="if($(window).width() > 1024) return false">
                     <p>Napomena:</p>
                     <textarea name="Napomena" id="" cols="20" rows="4" maxlength="100" style="resize:none"></textarea>
                 </div>

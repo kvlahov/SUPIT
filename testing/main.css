@@ -4,8 +4,16 @@
     box-sizing:border-box;
 }
 
-.container p {
-    font-size: 5em;
-    text-align: center;
-    color: rgb(41, 41, 41);    
+.meal {
+    display:inline-block;
+    margin-right:50px;
 }
+.itemPrice {
+    padding:5px;
+    padding-top:10px;
+    background:rgb(255, 198, 92);
+    border-radius: 5px;
+    display:inline-block;
+    font-size: 0.9em;
+}
+
