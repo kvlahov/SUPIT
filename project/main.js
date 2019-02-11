@@ -58,12 +58,12 @@ $(function () {
         close: () => $('body').removeClass('stop-scrolling'),
     });
 
-    setDialogWH();
+    setDialog();
     //resize dialog based on window size
-    $(window).resize(setDialogWH);
+    $(window).resize(setDialog);
 
 
-    function setDialogWH() {
+    function setDialog() {
         var w = $(window).width();
         var h = $(window).height();
 
@@ -173,6 +173,7 @@ $(function () {
                     const price = items.find(e => e.Naziv === name).Cijena;
 
                     addToOrderList(id, name, quantity, price)
+
                     updateTotal();
                     addClickEvent();
 
@@ -194,11 +195,10 @@ $(function () {
 
     })
 
-
+    
     $('#closeModal').click((e) => {
         $('#order').dialog('close');
     })
-
 
 })
 var items = [];
@@ -227,11 +227,6 @@ function getData(src) {
             $('#orderPop').dialog('open');
         })
 
-        //set accordion
-        // $('.items').accordion({
-        //     active:false,
-        //     colapsible: true,
-        // })
     });
 }
 
@@ -247,21 +242,17 @@ function addItem(name, description, price) {
         .attr('title', name);
     var html = `<div class="meal"><h5>${name}</h5><h6>${description}</h6></div><p class="itemPrice">${price},00kn</p>`;
     item.append(html);
-    // var content = $('<div></div>').addClass('itemContent')
-    //     .append(`<p>Količina</p>
-    //         <input type="number" id ="quantity" min = "1" max ="20" maxlength="2" value="1" onkeydown="return false">
-    //         <p>Napomena:</p>
-    //         <textarea name="Napomena" id="" cols="20" rows="4" maxlength="100" style="resize:none"></textarea>
-    //         <button class = "dialogButton">Dodaj</button>`
-            
-    //         );
+    
     $('.items:last-child()').append(item)
-    // .append(content);
+
 }
 
 function addToOrderList(id, name, quantity, price) {
     var html = `<tr><td>${id}</td><td>${name}</td><td>${quantity}</td><td>${price},00</td></tr>`;
     $('#orderItems').append(html)
+
+    console.log($(html));
+
 }
 
 function updateTotal() {
@@ -279,7 +270,7 @@ function updateTotal() {
 
 function addClickEvent() {
     $('#orderItems tr').click((e) => {
-        $(e.target).parent().remove()
+        $(e.currentTarget).remove()
         updateTotal();
     })
 }
